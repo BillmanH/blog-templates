@@ -1,0 +1,13 @@
+{
+"author":"William Harding",
+"date":"8/22/2015",
+"keywords":"D3, Data Visualization, Tutorial, js,HTML5, Python",
+"title": "Two years of data from my Personal Finance App",
+"content":[
+  {"type":"h1","n":"Going from a CSV file to JSON"},
+  {"type":"p","n":"this is some text, actually a lot of text"},
+  {"type":"p","n":"This tutorial should give you a pretty good understanding of how to convert a data file into a format suited for a D3 visualization. In this example I'm using the data file that I got from my Personal Finance App and the Zoomable Circle Packing from mbostock's blocks (That guy is awesome!)"},
+  {"type":"code","n":"<div></div>"},
+  {"type":"script","n":"2yearsOfFinancialData.html"}
+  ]
+}
