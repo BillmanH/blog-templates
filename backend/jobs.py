@@ -24,7 +24,9 @@ for art in articles:
     blogList.append({'name':name,'date':date,'dateStr':dateStr,'articleID':articleID})
 
 df = pd.DataFrame(blogList)
-df = df.sort_values(by="date",ascending=False).reset_index(drop=True)
+#TODO: sort_values was not supported in my version of Pandas. I need to upgrade. 
+#df = df.sort_values(by="date",ascending=False).reset_index(drop=True)
+df = df.sort(["date"],ascending=False)
 df = df[["dateStr","name",'articleID']]
 
 blogMenuKeys = df.T.to_dict()

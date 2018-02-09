@@ -1,0 +1,21 @@
+<html>
+<script type="text/javascript" src="{{ url_for('static', filename='d3.v3.min.js') }}"></script>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='blog_style.css') }}">
+
+	{% include "blogs/blog_head.html" %}
+	{% include "google_analytics.html" %}
+
+	{% include "blogs/blog_hide_code_button.html" %}
+	
+	{% include "blogs/blog_business_card.html" %}
+</body>
+<script>
+
+	var article = {{blogContent | safe}};
+	//if(article==null){article = "default"}
+	//var cotent = {{blogContent | safe}};
+
+</script>
+
+</html>
