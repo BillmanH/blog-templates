@@ -9,14 +9,17 @@ blogroutes = [blog]
 
 @blog.route('/blog')
 def blogTemplate():
-	article = request.args.get('c')
+	c = request.args.get('c')
 	t = request.args.get('t')
 	if t == "json":
-		blogTemplate = bbto.getBlogArticle(article)
-		return render_template('blogs/blog_template.html',blogContent=blogTemplate,article=article)
+		blogTemplate = bbto.getBlogArticle(c)
+		return render_template('blogs/blog_template.html',blogContent=blogTemplate,article=c)
 	if t == "html":
-		blogTemplate = bbto.getJupyterBlog(article)
+		try:
+			blogTemplate = bbto.getJupyterBlog(c)
+		except:
+			return c
 	#blogTemplate = bbto.getBlogArticle(article)
 	#blogTemplate = yaml.load(open('/home/ubuntu/flaskapp/templates/blogs/example_article_json.json', 'r'))
-		return render_template('blogs/blog_template2.html',blogContent=blogTemplate,article=article)
+		return render_template('blogs/blog_template2.html',blogContent=blogTemplate,article=c)
 	return "invalid blog type (t)"
