@@ -22,7 +22,7 @@ def getBlogArticle(article):
                 content = yaml.load(myKey.get_contents_as_string())
         return content
 
-def getJupyterBlog(article):
+def oldgetJupyterBlog(article):
         mybucket = conn.get_bucket('flaskgame')
         potentialKey = "blog/" + article + ".html" #note that the article may use '+' in place of ' '
         if potentialKey in [item.name for item in mybucket.list() if "blog/" in item.name]:
@@ -35,6 +35,12 @@ def getJupyterBlog(article):
         return content
 
 
+def getJupyterBlog(article):
+        mybucket = conn.get_bucket('flaskgame')
+        potentialKey = "blog/" + article + ".html" #note that the article may use '+' in place of ' '
+        defaultKey = mybucket.get_key("blog/" + article + ".html")
+        content = defaultKey.get_contents_as_string()
+	return content
 
 def getContentList():
 	mybucket = conn.get_bucket('flaskgame')
