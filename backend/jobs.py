@@ -32,8 +32,6 @@ for art in articles:
 		name = name.replace(".html","").encode('utf8')
 		dateStr = art.last_modified.encode('utf8')
 		articleID = str(art.name).encode('utf8')
-		articleID = articleID.replace("blog/","")
-		articleID = articleID.replace(".html","")
 		blogList.append({'name':name,'date':date,'dateStr':dateStr,'articleID':articleID,"type":"html"})
 
 df = pd.DataFrame(blogList)

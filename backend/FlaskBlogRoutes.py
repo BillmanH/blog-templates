@@ -13,13 +13,13 @@ def blogTemplate():
 	t = request.args.get('t')
 	if t == "json":
 		blogTemplate = bbto.getBlogArticle(c)
-		return render_template('blogs/blog_template.html',blogContent=blogTemplate,article=c)
+		return render_template('blogs/blog_template_json.html',blogContent=blogTemplate,article=c)
 	if t == "html":
 		try:
 			blogTemplate = bbto.getJupyterBlog(c)
 		except:
-			return c
-	#blogTemplate = bbto.getBlogArticle(article)
-	#blogTemplate = yaml.load(open('/home/ubuntu/flaskapp/templates/blogs/example_article_json.json', 'r'))
-		return render_template('blogs/blog_template2.html',blogContent=blogTemplate,article=c)
+			return c + " is an invalid blog article."
+		article = c.replace("blog/","")
+		article = article.replace(".html","")
+		return render_template('blogs/blog_template_jpyter.html',blogContent=blogTemplate,article=article)
 	return "invalid blog type (t)"
