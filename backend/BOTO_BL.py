@@ -23,7 +23,7 @@ def getBlogArticle(article):
         return content
 
 def getJupyterBlog(article):
-        article = article.replace(" ","+")
+        #article = article.replace(" ","+")
 	mybucket = conn.get_bucket('flaskgame')
         myKey = mybucket.get_key(article) #note that the article may use '+' in place of ' '
 	content = myKey.get_contents_as_string()

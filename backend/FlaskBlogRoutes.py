@@ -18,7 +18,11 @@ def blogTemplate():
 		try:
 			blogTemplate = bbto.getJupyterBlog(c)
 		except:
-			return c + " is an invalid blog article."
+			try:
+				c = c.replace(" ","+")
+				blogTemplate = bbto.getJupyterBlog(c)
+			except:
+				return c + " is an invalid blog article."
 		article = c.replace("blog/","")
 		article = article.replace(".html","")
 		return render_template('blogs/blog_template_jpyter.html',blogContent=blogTemplate,article=article)
