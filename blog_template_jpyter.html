@@ -1,0 +1,27 @@
+<html>
+<script type="text/javascript" src="{{ url_for('static', filename='d3.v3.min.js') }}"></script>
+
+
+	{% include "blogs/blog_head.html" %}
+	{% include "google_analytics.html" %}
+
+	{% include "blogs/blog_hide_code_button.html" %}
+	
+	{{ blogContent | safe }}	
+	{% include "blogs/blog_business_card.html" %}
+</body>
+<script>
+
+
+document.title = "{{ article }}"
+
+</script>
+<style>
+
+body  {
+	background-image: url("https://lh3.googleusercontent.com/jLnGbnOKRsNQXWB1xu5vXA7D7HL1gJQzzp6DB4s82jgdardDixYtlfKfGH89IxrWVQOQjQWGL3KeIvNOZ9wWb__-lGDNBiIBXKtHNqNhi7p8CdpHpXT-LxWPGVPpD7eqc8_u_xXeFA");
+	background-size:cover;
+	background-attachment: fixed;
+}
+</style>
+</html>

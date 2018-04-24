@@ -4,8 +4,9 @@ from wtforms import Form, TextField, validators
 import BOTO_BL as bbto
 
 blog = Blueprint('blog', __name__, template_folder='templates')
-
-blogroutes = [blog]
+adhoc = Blueprint('adhoc', __name__, template_folder='templates')
+blogroutes = [blog,
+		adhoc]
 
 @blog.route('/blog')
 def blogTemplate():
@@ -27,3 +28,10 @@ def blogTemplate():
 		article = article.replace(".html","")
 		return render_template('blogs/blog_template_jpyter.html',blogContent=blogTemplate,article=article)
 	return "invalid blog type (t)"
+
+
+@adhoc.route('/ad-hoc-chart')
+def adhocchart():
+	return render_template('blogs/adhoc_data_viz.html')
+
+	
