@@ -3,8 +3,8 @@ This code allows me to work on a jupyter notebook locally on my chromebook and w
 
 I've still got some things to work on but I like being able to publish a jupyter notebook very quickly. 
 
-#Things I'm still working on: 
-* the jquery isn't hiding the code correctly
+## Things I'm still working on: 
+* The jquery button isn't hiding the code correctly
 * I need a process to include images in the jupyter notebook so that I can upload them as well
 * I need to be able to attach a coresponding d3 graphic at the top
 
