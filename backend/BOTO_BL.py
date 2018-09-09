@@ -35,4 +35,9 @@ def getContentList():
 	content = yaml.load(myKey.get_contents_as_string())
 	return content
 
+def getD3Data(key):
+	mybucket = conn.get_bucket('metia-insights')
+	myKey = mybucket.get_key('Datasets/'+key)
+	content = yaml.load(myKey.get_contents_as_string())
+	return content
 

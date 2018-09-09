@@ -5,8 +5,11 @@ import BOTO_BL as bbto
 
 blog = Blueprint('blog', __name__, template_folder='templates')
 adhoc = Blueprint('adhoc', __name__, template_folder='templates')
+topicModels = Blueprint('topicModels', __name__, template_folder='templates')
+
 blogroutes = [blog,
-		adhoc]
+		adhoc,
+		topicModels]
 
 @blog.route('/blog')
 def blogTemplate():
@@ -33,5 +36,12 @@ def blogTemplate():
 @adhoc.route('/ad-hoc-chart')
 def adhocchart():
 	return render_template('blogs/adhoc_data_viz.html')
+
+
+@topicModels.route('/topicModels')
+def adhoctopicModelschart():
+	d = bbto.getD3Data('digTranTM.json')
+	return render_template('blogs/topicModelViz.html',d=d)
+
 
 	
