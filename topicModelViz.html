@@ -38,7 +38,7 @@
             </form>
         </p>
         <p>
-            <button onclick="getMessage()">Get Message</button>
+            <button onclick="getMessage()">Score text against Digital Transformation model</button>
         </p>
 <p id="document">
 
@@ -59,17 +59,23 @@ var margin = {
             bottom: 15,
             left: 60
         };
-        var width = 960 - margin.left - margin.right,
+        var width = 700 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
 
 var textline = 0
+var texty = 0
 var wordBlocksvg = d3.select("#wordBlocks").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", 400)
+            .attr("width", width) 
+            .attr("height", height)
+
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 function getMessage(){
 	var doc = d3.select("#msg").property("value")
-	a = doc.toLocaleLowerCase().split(" ")	
+	a = doc.toLocaleLowerCase().replace(/[^a-z ]/g, '').split(" ")	
 	console.log(a)
 	myWords = {}
 	for (var i in words){
@@ -86,7 +92,7 @@ function getMessage(){
             .enter()
             .append("text")
 		.attr("x", textline)
-		.attr("y", textline+50)
+		.attr("y", texty+50)
 		.text(function(d){return d})
 		.on("mouseover", function(d,i){
 		if(d in myWords){
@@ -97,8 +103,13 @@ function getMessage(){
 			}
 		})
 	.transition()
-		.attr("y", function(d,i){return (i*50)+15})
-		.attr("x", function(d,i){return (i)*(50)})
+		.attr("y", function(d,i){
+				r = getRandomArbitrary(0,height)
+				return r}
+			)
+		.attr("x", function(d,i){
+				r = getRandomArbitrary(0,height)
+				return r})
 		.attr("font-size", function(d,i){
 				if (d in myWords){
 					var x = myWords[d]["max score"]*100
