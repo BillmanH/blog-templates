@@ -115,9 +115,14 @@ function getMessage(){
 					var x = myWords[d]["max score"]*100
 				} else {var x = 15}
 				return String(x)+"px"
-			});
-}
-	
+			})
+		.attr("fill", function(d,i){
+		
+		if (d in myWords){
+			return "red"
+			} else {return "black"}
+			})		
+	}
 
 var data = [{
                 "name": "topic_0",
