@@ -42,7 +42,8 @@
         </p>
 <p id="document">
 
-<div id="graphic"></div>
+<div id="wordBlocks"></div>
+<div id="totalDocsScore"></div>
 
 
 <script>
@@ -50,6 +51,7 @@ var words = {{ d|tojson|safe }}
 </script>
 
 <script>
+var wordBlocksvg = d3.select("#graphic").append("svg")
 
 function getMessage(){
 	var doc = d3.select("#msg").property("value")
@@ -66,16 +68,22 @@ function getMessage(){
 			} 
 		}	
 	console.log(myWords)
+	wordBlocksvg.selectAll(".wordBlock")
+            .data(a)
+            .enter()
+            .append("rect")
+		.attr("x", function(d,i){return i*55})
+		.attr("y", 10)
+		.attr("width", 50)
+		.attr("height", 50)
 	}
 
 var data = [{
                 "name": "topic_0",
-                "value": 10,
-        },
+                "value": 10, },
             {
                 "name": "topic_1",
-                "value": 10,
-        },
+                "value": 10,},
             {
                 "name": "topic_2",
                 "value": 10,
