@@ -30,9 +30,7 @@
 <div id="topwordsviz"></div>
 <div id="topdocsviz"></div>
 
-<script>
 
-</script>
 <p>
 <form>
 <input type="text" value="Digital transformation is the profound transformation of business and organizational activities, processes, competencies and models to fully leverage the changes and opportunities of a mix of digital technologies and their accelerating impact across society in a strategic and prioritized way, with present and future shifts in mind." id="msg" >
@@ -65,11 +63,19 @@ var margin = {
         var width = 700 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
 
-var textline = 0
-var texty = 0
 var wordBlocksvg = d3.select("#wordBlocks").append("svg")
             .attr("width", width) 
             .attr("height", height)
+
+
+var textline = 0
+var texty = 0
+
+var topwordsviz = d3.select("#topwordsviz").append("svg")
+            .attr("width", width) 
+            .attr("height", height)
+
+
 
 
 function getRandomArbitrary(min, max) {
