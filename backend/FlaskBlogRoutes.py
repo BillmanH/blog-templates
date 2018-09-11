@@ -41,7 +41,9 @@ def adhocchart():
 @topicModels.route('/topicModels')
 def adhoctopicModelschart():
 	d = bbto.getD3Data('digTranTM.json')
-	return render_template('blogs/topicModelViz.html',d=d)
+	tw = bbto.getD3Data('topwords.json')
+	td = bbto.getD3Data('topdocs.json')
+	return render_template('blogs/topicModelViz.html',d=d,tw=tw,td=td)
 
 
 	

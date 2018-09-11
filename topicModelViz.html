@@ -9,37 +9,38 @@
     <style>
         body {
             font-family: "Arial", sans-serif;
-        }
-        
+        }        
         .bar {
             fill: #5f89ad;
         }
-        
         .axis {
             font-size: 13px;
         }
-        
         .axis path,
         .axis line {
             fill: none;
             display: none;
         }
-        
         .label {
-            font-size: 13px;
+           font-size: 13px;
         }
     </style>
 
 <body>
+<div id="topwordsviz"></div>
+<div id="topdocsviz"></div>
 
- <p>
-            <form>
-                <input type="text" value="Paste your text here" id="msg" >
-            </form>
-        </p>
-        <p>
-            <button onclick="getMessage()">Score text against Digital Transformation model</button>
-        </p>
+<script>
+
+</script>
+<p>
+<form>
+<input type="text" value="Digital transformation is the profound transformation of business and organizational activities, processes, competencies and models to fully leverage the changes and opportunities of a mix of digital technologies and their accelerating impact across society in a strategic and prioritized way, with present and future shifts in mind." id="msg" >
+</form>
+</p>
+<p>
+<button onclick="getMessage()">Score text against Digital Transformation model</button>
+</p>
 <p id="document">
 
 <div id="wordBlocks"></div>
@@ -48,6 +49,8 @@
 
 <script>
 var words = {{ d|tojson|safe }}
+var topwords = {{ tw|tojson|safe }}
+var topdocs = {{ td|tojson|safe }}
 </script>
 
 <script>
@@ -104,7 +107,7 @@ function getMessage(){
 		})
 	.transition()
 		.attr("y", function(d,i){
-				r = getRandomArbitrary(0,height)
+				r = getRandomArbitrary(40,height)
 				return r}
 			)
 		.attr("x", function(d,i){
