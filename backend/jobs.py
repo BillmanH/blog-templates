@@ -12,6 +12,7 @@ articles = [x for x in mybucket.list() if ("blog" in x.name)&(x.name!="blog/")&(
 
 blogList = []
 for art in articles:
+	print art
 	if '.json' in art.name:
 		j = yaml.load(art.get_contents_as_string())
 		name = j['title']
