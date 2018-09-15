@@ -16,13 +16,6 @@
    var topdocs = {{ td|tojson|safe }}
 </script>
 <script>
-   //set up svg using margin conventions - we'll need plenty of room on the left for labels
-   var margin = {
-       top: 15,
-       right: 25,
-       bottom: 15,
-       left: 60
-   };
    var width = 700 - margin.left - margin.right,
        height = 500 - margin.top - margin.bottom;
    var wordBlocksvg = d3.select("#wordBlocks").append("svg")
@@ -30,10 +23,8 @@
        .attr("height", height)
    var textline = 0
    var texty = 0
-   var topwordsviz = d3.select("#topwordsviz").append("svg")
-       .attr("width", width) 
-       .attr("height", height)
-   function getRandomArbitrary(min, max) {
+   
+function getRandomArbitrary(min, max) {
    return Math.random() * (max - min) + min;
    }
    function getMessage(){
@@ -86,85 +77,15 @@
    } else {return "black"}
    })		
    }
-   var data = [{
-           "name": "topic_0",
-           "value": 1, },
-       {
-           "name": "topic_1",
-           "value": 1,},
-       {
-           "name": "topic_2",
-           "value": 1,
-   },
-       {
-           "name": "topic_3",
-           "value": 1,
-   },
-       {
-           "name": "topic_4",
-           "value": 1,
-   },
-       {
-           "name": "topic_5",
-           "value": 1,
-   },
-       {
-           "name": "topic_6",
-           "value": 1,
-   },
-   {
-           "name": "topic_7",
-           "value": 1,
-   },
-   {
-           "name": "topic_8",
-           "value": 1,
-   },
-   {
-           "name": "topic_9",
-           "value": 1,
-   },
-   {
-           "name": "topic_10",
-           "value": 1,
-   },
-   {
-           "name": "topic_11",
-           "value": 1,
-   },
-   {
-           "name": "topic_12",
-           "value": 1,
-   },
-   {
-           "name": "topic_13",
-           "value": 1,
-   },
-   {
-           "name": "topic_14",
-           "value": 1,
-   },
-   {
-           "name": "topic_15",
-           "value": 1,
-   },
-   {
-           "name": "topic_16",
-           "value": 1,
-   },
-   {
-           "name": "topic_17",
-           "value": 1,
-   },
-   {
-           "name": "topic_18",
-           "value": 1,
-   },
-   {
-           "name": "topic_19",
-           "value": 1,
-   }
-   ];
+   
+   var data = []
+   for(i in topwords){
+	key = Object.keys(topwords[i]);
+	console.log(key)
+	tname = key;
+	tvalue = 1;
+	data.push({"name":tname,"value":tvalue});
+	};
    
    var svg = d3.select("#totalDocsScore").append("svg")
        .attr("width", width + margin.left + margin.right)
