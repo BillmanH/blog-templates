@@ -1,0 +1,224 @@
+<p>
+<form>
+   <input type="text" value="Digital transformation is the profound transformation of business and organizational activities, processes, competencies and models to fully leverage the changes and opportunities of a mix of digital technologies and their accelerating impact across society in a strategic and prioritized way, with present and future shifts in mind." id="msg" >
+</form>
+</p>
+
+<p>
+   <button onclick="getMessage()">Score text against Digital Transformation model</button>
+</p>
+<p id="document">
+<div id="wordBlocks"></div>
+<div id="totalDocsScore"></div>
+<script>
+   var words = {{ d|tojson|safe }}
+   var topwords = {{ tw|tojson|safe }}
+   var topdocs = {{ td|tojson|safe }}
+</script>
+<script>
+   //set up svg using margin conventions - we'll need plenty of room on the left for labels
+   var margin = {
+       top: 15,
+       right: 25,
+       bottom: 15,
+       left: 60
+   };
+   var width = 700 - margin.left - margin.right,
+       height = 500 - margin.top - margin.bottom;
+   var wordBlocksvg = d3.select("#wordBlocks").append("svg")
+       .attr("width", width) 
+       .attr("height", height)
+   var textline = 0
+   var texty = 0
+   var topwordsviz = d3.select("#topwordsviz").append("svg")
+       .attr("width", width) 
+       .attr("height", height)
+   function getRandomArbitrary(min, max) {
+   return Math.random() * (max - min) + min;
+   }
+   function getMessage(){
+   var doc = d3.select("#msg").property("value")
+   a = doc.toLocaleLowerCase().replace(/[^a-z ]/g, '').split(" ")	
+   console.log(a)
+   myWords = {}
+   for (var i in words){
+   //console.log(i)
+   if (a.indexOf(words[i].word)>0){
+   myWords[a[a.indexOf(words[i].word)]]=words[i]
+   } 
+   }	
+   console.log(myWords)
+   textline = textline+15;
+   wordBlocksvg.selectAll("text").remove()
+   wordBlocksvg.selectAll(".wordBlock")
+       .data(a)
+       .enter()
+       .append("text")
+   .attr("x", textline)
+   .attr("y", texty+50)
+   .text(function(d){return d})
+   .on("mouseover", function(d,i){
+   if(d in myWords){
+   console.log(myWords[d])
+   for (var w in myWords[d]){
+   d3.select("#"+w).transition().attr("width",x(myWords[d][w]))
+   }
+   }
+   })
+   .transition()
+   .attr("y", function(d,i){
+   r = getRandomArbitrary(40,height)
+   return r}
+   )
+   .attr("x", function(d,i){
+   r = getRandomArbitrary(0,height)
+   return r})
+   .attr("font-size", function(d,i){
+   if (d in myWords){
+   var x = myWords[d]["max score"]*100
+   } else {var x = 15}
+   return String(x)+"px"
+   })
+   .attr("fill", function(d,i){
+   
+   if (d in myWords){
+   return "red"
+   } else {return "black"}
+   })		
+   }
+   var data = [{
+           "name": "topic_0",
+           "value": 1, },
+       {
+           "name": "topic_1",
+           "value": 1,},
+       {
+           "name": "topic_2",
+           "value": 1,
+   },
+       {
+           "name": "topic_3",
+           "value": 1,
+   },
+       {
+           "name": "topic_4",
+           "value": 1,
+   },
+       {
+           "name": "topic_5",
+           "value": 1,
+   },
+       {
+           "name": "topic_6",
+           "value": 1,
+   },
+   {
+           "name": "topic_7",
+           "value": 1,
+   },
+   {
+           "name": "topic_8",
+           "value": 1,
+   },
+   {
+           "name": "topic_9",
+           "value": 1,
+   },
+   {
+           "name": "topic_10",
+           "value": 1,
+   },
+   {
+           "name": "topic_11",
+           "value": 1,
+   },
+   {
+           "name": "topic_12",
+           "value": 1,
+   },
+   {
+           "name": "topic_13",
+           "value": 1,
+   },
+   {
+           "name": "topic_14",
+           "value": 1,
+   },
+   {
+           "name": "topic_15",
+           "value": 1,
+   },
+   {
+           "name": "topic_16",
+           "value": 1,
+   },
+   {
+           "name": "topic_17",
+           "value": 1,
+   },
+   {
+           "name": "topic_18",
+           "value": 1,
+   },
+   {
+           "name": "topic_19",
+           "value": 1,
+   }
+   ];
+   
+   var svg = d3.select("#totalDocsScore").append("svg")
+       .attr("width", width + margin.left + margin.right)
+       .attr("height", height + margin.top + margin.bottom)
+       .append("g")
+       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+   var x = d3.scale.linear()
+       .range([0, width])
+       .domain([0, d3.max(data, function (d) {
+           return d.value;
+       })]);
+   var y = d3.scale.ordinal()
+       .rangeRoundBands([height, 0], .1)
+       .domain(data.map(function (d) {
+           return d.name;
+       }));
+   //make y axis to show bar names
+   var yAxis = d3.svg.axis()
+       .scale(y)
+       //no tick marks
+       .tickSize(0)
+       .orient("left");
+   var gy = svg.append("g")
+       .attr("class", "y axis")
+       .call(yAxis)
+   var bars = svg.selectAll(".bar")
+       .data(data)
+       .enter()
+       .append("g")
+   //append rects
+   bars.append("rect")
+       .attr("class", "bar")
+       .attr("y", function (d) {
+           return y(d.name);
+       })
+       .attr("height", y.rangeBand())
+       .attr("x", 0)
+       .attr("width", function (d) {
+           return x(d.value);
+       })
+   .attr("id",function(d){return d.name})
+   //add a value label to the right of each bar
+   bars.append("text")
+       .attr("class", "label")
+       //y position of the label is halfway down the bar
+       .attr("y", function (d) {
+           return y(d.name) + y.rangeBand() / 2 + 4;
+       })
+       //x position is 3 pixels to the right of the bar
+       .attr("x", function (d) {
+           return x(d.value) + 3;
+       })
+       .text(function (d) {
+           return d.value;
+       })
+   
+</script>
